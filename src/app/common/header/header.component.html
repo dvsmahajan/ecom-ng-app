@@ -985,8 +985,8 @@
 								<!-- subscribers -->
 								<li
 									class="main-menu__item main-menu__item--submenu--menu main-menu__item--has-submenu">
-									<a href="/sellers"
-									class="main-menu__link"> Sellers </a>
+									<a routerLink="/sellers"
+									class="main-menu__link" (click)="closeAllHeaderPopup()"> Sellers </a>
 								</li>
 								
 								<!-- Subcribers -->
@@ -1318,38 +1318,38 @@
 						</span>
 						</a>
 					</div>
-					<div class="indicator indicator--trigger--click"
+					<div [class]="loginButtonCSS"
 						id="loginRProfileBtn">
-						<a [routerLink]='' class="indicator__button" > <span
+						<a [routerLink]='' class="indicator__button" (click)="onClickProfile()"> <span
 							class="indicator__icon"> <svg width="32" height="32">
                                     <path
 										d="M16,18C9.4,18,4,23.4,4,30H2c0-6.2,4-11.5,9.6-13.3C9.4,15.3,8,12.8,8,10c0-4.4,3.6-8,8-8s8,3.6,8,8c0,2.8-1.5,5.3-3.6,6.7
 	C26,18.5,30,23.8,30,30h-2C28,23.4,22.6,18,16,18z M22,10c0-3.3-2.7-6-6-6s-6,2.7-6,6s2.7,6,6,6S22,13.3,22,10z" />
                                 </svg>
-						</span> <span class="indicator__title ">Hello,
-								Log In</span> <span class="indicator__value">My
+						</span> <span class="indicator__title " *ngIf="!isLoggedIn">Hello,
+								Log In</span> <span class="indicator__title" *ngIf="isLoggedIn">My
 								Account</span>
 						</a>
 						<div class="indicator__content">
 							<div class="account-menu">
 								<form class="account-menu__form "
-									id="userLoginForm">
+									id="userLoginForm" *ngIf="!isLoggedIn" [formGroup]="userForm" (ngSubmit)="onSubmitLoginDetails()">
 									<div class="account-menu__form-title">Log In to Your
 										Account</div>
 									<div class="form-group">
-										<div class="alert alert-danger d-none" id="logingErr"></div>
+										<div class="alert alert-danger" *ngIf="loginErrMsg.length>0">{{loginErrMsg}}</div>
 									</div>
 									<div class="form-group">
 										<label for="header-signin-email" class="sr-only">Email
 											address</label> <input id="header-signin-email" type="text"
-											class="form-control form-control-sm" name="username"
-											placeholder="enter username or email address">
+											class="form-control form-control-sm"  formControlName='username' name="username"
+											placeholder="Username/Email">
 									</div>
 									<div class="form-group">
 										<label for="header-signin-password" class="sr-only">Password</label>
 										<div class="account-menu__form-forgot">
 											<input id="header-signin-password" type="password"
-												name="password" class="form-control form-control-sm"
+												name="password"  formControlName="password" class="form-control form-control-sm"
 												placeholder="Password"> <a href=""
 												class="account-menu__form-forgot-link" data-toggle="modal"
 												data-target="#forgotPassword">Forgot?</a>
@@ -1358,38 +1358,37 @@
 											for="header-signin-password"></label>
 									</div>
 									<div class="form-group account-menu__form-button">
-										<button type="submit" class="btn btn-primary btn-sm">Login</button>
+										<button type="submit" class="btn btn-primary btn-sm" [disabled]='!userForm.valid'>Login</button>
 									</div>
 									<div class="account-menu__form-link">
 										<a href="/createBuyerAccount">Create An Account</a>
 									</div>
 								</form>
-								<div class="account-menu__divider   d-none"></div>
-								<a href="" class="account-menu__user ">
+								<div class="account-menu__divider " *ngIf="isLoggedIn"></div>
+								<a href="" class="account-menu__user" *ngIf="isLoggedIn">
 									<div class="account-menu__user-avatar">
 										<img src="images/avatars/avatar-4.jpg" alt="">
 									</div>
 									<div class="account-menu__user-info">
-										<div class="account-menu__user-name">Ryan Ford</div>
+										<div class="account-menu__user-name">{{username}}</div>
 										<div class="account-menu__user-email">red-parts@example.com</div>
 									</div>
 								</a>
-								<div class="account-menu__divider"></div>
-								<ul class="account-menu__links">
+								<div class="account-menu__divider" *ngIf="isLoggedIn"></div>
+								<ul class="account-menu__links" *ngIf="isLoggedIn">
 									<li><a href="account-dashboard.html">Dashboard</a></li>
 									<li><a href="account-dashboard.html">Garage</a></li>
-									<li><a href="/buyerProfilePage">Edit Profile</a></li>
+									<li><a routerLink="/user-profile" (click)="closeAllHeaderPopup()">Edit Profile</a></li>
 									<li><a href="account-orders.html">Order History</a></li>
 									<li><a href="account-addresses.html">Addresses</a></li>
 								</ul>
-								<div class="account-menu__divider"></div>
-								<ul class="account-menu__links">
+								<div class="account-menu__divider" *ngIf="isLoggedIn"></div>
+								<ul class="account-menu__links" *ngIf="isLoggedIn">
 									<li><a href="account-login.html">Logout</a></li>
 								</ul>
 							</div>
 						</div>
-						<input type="hidden" id="isActiveUser" name="isActiveUser"
-							value="0">
+					
 					</div>
 
 					<div class="indicator indicator--trigger--click">

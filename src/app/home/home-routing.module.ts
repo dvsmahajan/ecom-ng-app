@@ -9,6 +9,10 @@ const routes: Routes = [
     component: HomeComponent,
     children:[
       {
+        path:'',
+        loadChildren: ()=> import('./home-main/home-main.module').then(m=>m.HomeMainModule)
+      },
+      {
         path:'user-profile',
         loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) 
       },

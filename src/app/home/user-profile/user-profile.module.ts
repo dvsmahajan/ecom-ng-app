@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,9 @@ import { UserProfileComponent } from './user-profile.component';
   declarations: [UserProfileComponent],
   imports: [
     CommonModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserProfileModule { }

@@ -297,25 +297,25 @@
     /*
     // .indicator (dropcart, account-menu)
     */
-    $(function() {
-        $('.indicator--trigger--click .indicator__button').on('click', function(event) {
-            event.preventDefault();
+    // $(function() {
+    //     $('.indicator--trigger--click .indicator__button').on('click', function(event) {
+    //         event.preventDefault();
 
-            const dropdown = $(this).closest('.indicator');
+    //         const dropdown = $(this).closest('.indicator');
 
-            if (dropdown.is('.indicator--open')) {
-                dropdown.removeClass('indicator--open');
-            } else {
-                dropdown.addClass('indicator--open');
-            }
-        });
+    //         if (dropdown.is('.indicator--open')) {
+    //             dropdown.removeClass('indicator--open');
+    //         } else {
+    //             dropdown.addClass('indicator--open');
+    //         }
+    //     });
 
-        $(document).on('click', function (event) {
-            $('.indicator')
-                .not($(event.target).closest('.indicator'))
-                .removeClass('indicator--open');
-        });
-    });
+    //     $(document).on('click', function (event) {
+    //         $('.indicator')
+    //             .not($(event.target).closest('.indicator'))
+    //             .removeClass('indicator--open');
+    //     });
+    // });
 
     /*
     // .layout-switcher

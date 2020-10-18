@@ -37,31 +37,31 @@
                                 <div class="card-body card-body--padding--2">
                                     <div class="row no-gutters">
                                         <div class="col-12 col-lg-12 col-xl-12">
-                                            <form id="updateUserProfile">
+                                            <form id="updateUserProfile" [formGroup]="userForm" (ngSubmit)="onSubmitUpdateUser()">
                                                 <div class="form-group">
                                                     <label for="profile-first-name">First Name</label> <input
-                                                        type="text" class="form-control" name="firstName"
+                                                        type="text" class="form-control" name="firstName" formControlName="firstName"
                                                         id="profile-first-name" placeholder="First Name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="profile-last-name">Last Name</label> <input
-                                                        type="text" class="form-control" name="lastName"
+                                                        type="text" class="form-control" name="lastName" formControlName="lastName"
                                                         id="profile-last-name" placeholder="Last Name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="profile-username">Username</label> <input
-                                                        type="text" class="form-control" name="username"
+                                                        type="text" class="form-control" name="username" formControlName="username"
                                                         id="profile-username" placeholder="username" readonly>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="profile-email">Email Address</label> <input
-                                                        type="email" class="form-control" name="email"
+                                                        type="email" class="form-control" name="email" formControlName = "email"
                                                         id="profile-email" placeholder="Email Address" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="profile-phone">Phone Number</label> <input
-                                                        type="text" class="form-control" name="mobileNumber"
+                                                        type="text" class="form-control" name="mobileNumber" formControlName="mobileNumber"
                                                         id="profile-phone" placeholder="Phone Number">
                                                 </div>
                                                 <div class="form-group mb-0">
@@ -80,35 +80,43 @@
                                 </div>
                                 <div class="card-divider"></div>
                                 <div class="card-body card-body--padding--2">
-                                    <div class="row no-gutters mb-4" id="dispUsrAddr">
+                                    <div class="row no-gutters mb-4" id="dispUsrAddr"  *ngIf="userAddress.length>0 && showAddress==true">
                                         <div id="addr-disp">
-                                            
+                                            <div class="addDiv" *ngFor="let address of userAddress">
+                                                <div class="addrType">{{address.addressType}}</div>
+                                                <div class="row h-100">
+                                                    <div class="col-sm-9">{{address.addressLine1}} , {{address.addressLine2}}, {{address.state}} - {{address.pincode}} </div>
+                                                    <div class="col-sm my-auto">
+                                                        <button class="btn btn-info" (click)="editUserAddress(address)" >Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row form-group mb-0">
-                                            <button class="btn btn-primary mt-3" onclick="addAddrBtn()">Add
+                                            <button class="btn btn-primary mt-3" (click)="addAddrBtn()" >Add
                                                 Address</button>
                                         </div>
                                     </div>
-                                    <div class="row no-gutters" id="addUsrAddr">
-                                        <form id="usrAddrForm" class="col-12 col-lg-12 col-sm-12">
+                                    <div class="row no-gutters" id="addUsrAddr" *ngIf="userAddress.length==0 || showAddress == false">
+                                        <form id="usrAddrForm" class="col-12 col-lg-12 col-sm-12" [formGroup]="userAddressForm" (ngSubmit)="onSubmitUserAddress()">
                                             <!-- <div class="col-12 col-lg-12 col-sm-12"> -->
                                             <div class="form-group">
                                                 <!-- <input type="hidden" name="formType" value="add" id="formType"> -->
                                                 <label for="profile-address-line-1">Address Line 1</label>
                                                 <textarea rows="2" id="profile-address-line-1"
-                                                    class="form-control" name="addressLine1"></textarea>
+                                                    class="form-control" name="addressLine1" formControlName="addressLine1"></textarea>
 
                                             </div>
                                             <div class="form-group">
                                                 <label for="profile-address-line-2">Address Line 2</label>
                                                 <textarea rows="2" id="profile-address-line-2"
-                                                    class="form-control" name="addressLine2"></textarea>
+                                                    class="form-control" name="addressLine2" formControlName="addressLine2"></textarea>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="address-state">State</label> <select
-                                                    class="form-control" name="state" id="address-state">
+                                                    class="form-control" name="state" id="address-state" formControlName="state">
                                                     <option value="">select state</option>
                                                     <option>Abu Dhabi</option>
                                                     <option>Ajman</option>
@@ -123,19 +131,19 @@
 
                                             <div class="form-group">
                                                 <label for="address-pincode">Pincode</label> <input
-                                                    type="text" class="form-control" name="pincode"
+                                                    type="text" class="form-control" name="pincode" formControlName="pincode"
                                                     id="address-pincode" placeholder="enter address pincode">
                                             </div>
                                             <div class="form-group">
                                                 <label for="address-addrType">Address Type</label> <input
-                                                    type="text" class="form-control" name="addressType"
+                                                    type="text" class="form-control" name="addressType" formControlName="addressType"
                                                     id="address-addrType" placeholder="enter address type">
                                             </div>
 
-                                            <input type="hidden" id="id" name="id">
+                                            <input type="hidden" id="id" name="id" formControlName="id">
                                             <div class="form-group mb-0">
                                                 
-                                                <button class="btn btn-primary mt-3" type="submit">Save</button>
+                                                <button class="btn btn-primary mt-3" type="submit" [disabled]='!userAddressForm.valid'>Save</button>
                                             </div>
                                             <!-- </div> -->
                                         </form>
