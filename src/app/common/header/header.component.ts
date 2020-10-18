@@ -9,6 +9,9 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
   isLoggedIn=true;
+
+  loginButtonCSS = 'indicator indicator--trigger--click';
+  // loginButtonCSS1 = 'indicator indicator--trigger--click indicator--open';
   ngOnInit(): void {
     
   }

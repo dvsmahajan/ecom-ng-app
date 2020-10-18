@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "ECOM-APP": {
@@ -26,7 +26,17 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+             "node_modules/jquery/dist/jquery.min.js",
+              "./src/assets/js/bootstrap.bundle.min.js",
+              "./src/assets/js/owl.carousel.min.js",
+              "./src/assets/js/nouislider.min.js",
+              "./src/assets/js/photoswipe.min.js",
+              "./src/assets/js/photoswipe-ui-default.min.js",
+              "./src/assets/js/select2.min.js",
+              "./src/assets/js/number.js",
+              "./src/assets/js/main.theme.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ECOM-APP"
+    }
+  },
+  "defaultProject": "ECOM-APP",
+  "cli": {
+    "analytics": "57300c5c-5517-41e9-a4a4-e2590850aa2d"
+  }
 }
