@@ -1,3 +1,4 @@
+import { ProductService } from './../../service/product/product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeMainComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private productService: ProductService) { }
+  resp:any=[];
   ngOnInit(): void {
+    this.getMainPageProducts();
+  }
+
+  homePageProductList:any = [];
+  getMainPageProducts() {
+    this.productService.getHomePageProducts().subscribe(data=>{
+      this.resp= data;
+      console.log(this.resp)
+      if(this.resp.code ==200){
+        this.homePageProductList = this.resp.details;
+      }
+    });
   }
 
 }
