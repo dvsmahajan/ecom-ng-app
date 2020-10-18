@@ -1,0 +1,155 @@
+<!-- site__body -->
+<div class="site__body">
+    <!-- <div class="block-space block-space--layout--after-header"></div> -->
+    <div class="block">
+        <div class="container container--max--xl">
+            <div class="row content-justify-center">
+                <div class="col-sm-12 text-center">
+                    <div class="alert" id="usrUpdtProf"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-3 d-flex">
+                    <div class="account-nav flex-grow-1">
+                        <h4 class="account-nav__title">Navigation</h4>
+                        <ul class="account-nav__list">
+                            <li class="account-nav__item "><a href="#">Dashboard</a></li>
+                            <li class="account-nav__item "><a href="#">Garage</a></li>
+                            <li class="account-nav__item "><a href="/buyerProfilePage">Edit
+                                    Profile</a></li>
+                            <li class="account-nav__item "><a href="#">Order History</a></li>
+                            <li class="account-nav__item "><a href="#">Addresses</a></li>
+                            <li class="account-nav__item "><a href="/usrPassword">Password</a></li>
+                            <li class="account-nav__divider" role="presentation"></li>
+                            <li class="account-nav__item "><a href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+                    <div class="row" id="accountProfile">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Edit Profile</h5>
+                                </div>
+                                <div class="card-divider"></div>
+                                <div class="card-body card-body--padding--2">
+                                    <div class="row no-gutters">
+                                        <div class="col-12 col-lg-12 col-xl-12">
+                                            <form id="updateUserProfile">
+                                                <div class="form-group">
+                                                    <label for="profile-first-name">First Name</label> <input
+                                                        type="text" class="form-control" name="firstName"
+                                                        id="profile-first-name" placeholder="First Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profile-last-name">Last Name</label> <input
+                                                        type="text" class="form-control" name="lastName"
+                                                        id="profile-last-name" placeholder="Last Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profile-username">Username</label> <input
+                                                        type="text" class="form-control" name="username"
+                                                        id="profile-username" placeholder="username" readonly>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="profile-email">Email Address</label> <input
+                                                        type="email" class="form-control" name="email"
+                                                        id="profile-email" placeholder="Email Address" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profile-phone">Phone Number</label> <input
+                                                        type="text" class="form-control" name="mobileNumber"
+                                                        id="profile-phone" placeholder="Phone Number">
+                                                </div>
+                                                <div class="form-group mb-0">
+                                                    <button class="btn btn-primary mt-3">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>User Address</h5>
+                                </div>
+                                <div class="card-divider"></div>
+                                <div class="card-body card-body--padding--2">
+                                    <div class="row no-gutters mb-4" id="dispUsrAddr">
+                                        <div id="addr-disp">
+                                            
+                                        </div>
+
+                                        <div class="row form-group mb-0">
+                                            <button class="btn btn-primary mt-3" onclick="addAddrBtn()">Add
+                                                Address</button>
+                                        </div>
+                                    </div>
+                                    <div class="row no-gutters" id="addUsrAddr">
+                                        <form id="usrAddrForm" class="col-12 col-lg-12 col-sm-12">
+                                            <!-- <div class="col-12 col-lg-12 col-sm-12"> -->
+                                            <div class="form-group">
+                                                <!-- <input type="hidden" name="formType" value="add" id="formType"> -->
+                                                <label for="profile-address-line-1">Address Line 1</label>
+                                                <textarea rows="2" id="profile-address-line-1"
+                                                    class="form-control" name="addressLine1"></textarea>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="profile-address-line-2">Address Line 2</label>
+                                                <textarea rows="2" id="profile-address-line-2"
+                                                    class="form-control" name="addressLine2"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="address-state">State</label> <select
+                                                    class="form-control" name="state" id="address-state">
+                                                    <option value="">select state</option>
+                                                    <option>Abu Dhabi</option>
+                                                    <option>Ajman</option>
+                                                    <option>Al Fujayrah</option>
+                                                    <option>Sharjah</option>
+                                                    <option>Dubai</option>
+                                                    <option>Ra's al Khaymah</option>
+                                                    <option>Umm al</option>
+                                                    <option>Qaywayn</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="address-pincode">Pincode</label> <input
+                                                    type="text" class="form-control" name="pincode"
+                                                    id="address-pincode" placeholder="enter address pincode">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address-addrType">Address Type</label> <input
+                                                    type="text" class="form-control" name="addressType"
+                                                    id="address-addrType" placeholder="enter address type">
+                                            </div>
+
+                                            <input type="hidden" id="id" name="id">
+                                            <div class="form-group mb-0">
+                                                
+                                                <button class="btn btn-primary mt-3" type="submit">Save</button>
+                                            </div>
+                                            <!-- </div> -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+</div>
+<!-- site__body / end -->
