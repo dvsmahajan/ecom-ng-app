@@ -1,11 +1,11 @@
 <!-- site__body -->
 <div class="site__body">
     <!-- <div class="block-space block-space--layout--after-header"></div> -->
-    <div class="block">
+    <div class="block mt-5">
         <div class="container container--max--xl">
             <div class="row content-justify-center">
                 <div class="col-sm-12 text-center">
-                    <div class="alert" id="usrUpdtProf"></div>
+                    <div [class]="alertProfileCSSClass" id="usrUpdtProf">{{updateTxt}}</div>
                 </div>
             </div>
             <div class="row">
@@ -65,7 +65,7 @@
                                                         id="profile-phone" placeholder="Phone Number">
                                                 </div>
                                                 <div class="form-group mb-0">
-                                                    <button class="btn btn-primary mt-3">Update</button>
+                                                    <button class="btn btn-primary mt-3" [disabled]="!userForm.valid">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -81,12 +81,12 @@
                                 <div class="card-divider"></div>
                                 <div class="card-body card-body--padding--2">
                                     <div class="row no-gutters mb-4" id="dispUsrAddr"  *ngIf="userAddress.length>0 && showAddress==true">
-                                        <div id="addr-disp">
-                                            <div class="addDiv" *ngFor="let address of userAddress">
+                                        <div id="addr-disp" *ngFor="let address of userAddress">
+                                            <div class="addDiv" >
                                                 <div class="addrType">{{address.addressType}}</div>
                                                 <div class="row h-100">
-                                                    <div class="col-sm-9">{{address.addressLine1}} , {{address.addressLine2}}, {{address.state}} - {{address.pincode}} </div>
-                                                    <div class="col-sm my-auto">
+                                                    <div class="col-sm-12">{{address.addressLine1}} , {{address.addressLine2}}, {{address.state}} - {{address.pincode}} </div>
+                                                    <div class="row col-sm-12 justify-content-end">
                                                         <button class="btn btn-info" (click)="editUserAddress(address)" >Edit</button>
                                                     </div>
                                                 </div>

@@ -10,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService : UserService, private fb : FormBuilder) { }
-
+  updateTxt='';
+  alertProfileCSSClass='alert d-none';
   resp:any=[];
   userAddress:any=[];
   showAddress=true;
@@ -32,6 +33,9 @@ export class UserProfileComponent implements OnInit {
     addressType:['',[Validators.required]]
   });
   ngOnInit(): void {
+    this.getUserDetails();
+  }
+  getUserDetails() {
     this.userService.getUserProfileDetails().subscribe(data =>{
       this.resp = data;
       // console.log(this.resp);
@@ -47,25 +51,46 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  onSubmitUpdateUser(){
+    this.userService.updateUserDetails(this.userForm.value).subscribe(data=>{
+      this.resp = data;
+      console.log(this.resp);
+      if(this.resp.code == 200){
+        this.alertProfileCSSClass="alert alert-success";
+        this.updateTxt="User profile succesfully updated.";
+      }else{
+        this.alertProfileCSSClass="alert alert-danger";
+        this.updateTxt="User profile not updated."
+      }
+    },
+    error=>{
+      console.log(error);
+      this.alertProfileCSSClass="alert alert-danger";
+      this.updateTxt="User profile not updated."
+    });
+  }
+
   onSubmitUserAddress(){
-    console.log(this.userAddressForm.controls.value)
-    if(this.userAddressForm.controls['id'] && this.userAddressForm.controls['id'].value.length>0 && this.userAddressForm.controls['id'].value >0){
-      alert('update')
-    }else{
-      // this.userService.addUserAddress(this.userAddressForm.value).subscribe(data=>{
-      //   this.resp = data;
-      //   if(this.resp){
-      //     this.userAddress = this.resp;
-      //     console.log(this.userAddress);  
-      //   }
-      // },
-      // error=>{
-      //   console.log(error);
-      // });
-      alert('add');
-    }
+    
 
-
+      this.userService.addUserAddress(this.userAddressForm.value).subscribe(data=>{
+        this.resp = data;
+        if(this.resp){
+          this.userAddress = this.resp;
+          console.log(this.userAddress);  
+          this.showAddress = true;
+          this.alertProfileCSSClass="alert alert-success";
+          this.updateTxt="User address succesfully updated.";
+        }else{
+          this.alertProfileCSSClass="alert alert-danger";
+          this.updateTxt="User address not updated."
+        }
+      },
+      error=>{
+        console.log(error);
+        this.alertProfileCSSClass="alert alert-danger";
+        this.updateTxt="User address not updated.";
+      });
   }
 
   addAddrBtn(){
@@ -83,6 +108,6 @@ export class UserProfileComponent implements OnInit {
     this.userAddressForm.controls['addressLine2'].setValue(userAddress.addressLine2);
     this.showAddress = false;
   }
-  
+
 
 }
